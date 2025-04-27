@@ -1,0 +1,26 @@
+<!-- src/app/features/admin/departments/department-management.component.html -->
+<mat-card>
+  <h2>Departments</h2>
+  <form [formGroup]="departmentForm" (ngSubmit)="add()">
+    <mat-form-field appearance="fill">
+      <mat-label>Name</mat-label>
+      <input matInput formControlName="name" />
+    </mat-form-field>
+    <button mat-raised-button color="primary">Add Department</button>
+  </form>
+
+  <mat-table [dataSource]="departments">
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+      <mat-cell *matCellDef="let d">{{ d.name }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
+      <mat-cell *matCellDef="let d">
+        <button mat-button color="warn" (click)="delete(d._id)">Delete</button>
+      </mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+</mat-card>

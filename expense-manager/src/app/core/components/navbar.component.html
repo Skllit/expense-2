@@ -1,0 +1,26 @@
+<!-- frontend/src/app/core/components/navbar.component.html -->
+<mat-toolbar color="primary">
+    <span>Expense Manager</span>
+    <span class="spacer"></span>
+  
+    <ng-container *ngIf="!auth.isLoggedIn()">
+      <a mat-button routerLink="/login" routerLinkActive="active">Login</a>
+      <a mat-button routerLink="/register" routerLinkActive="active">Register</a>
+    </ng-container>
+  
+    <ng-container *ngIf="auth.isLoggedIn() && auth.getRole()==='user'">
+      <a mat-button routerLink="/user/view-expenses" routerLinkActive="active">My Expenses</a>
+      <a mat-button routerLink="/user/add-expense" routerLinkActive="active">Add Expense</a>
+      <a mat-button routerLink="/user/analytics" routerLinkActive="active">Analytics</a>
+      <button mat-button (click)="logout()">Logout</button>
+    </ng-container>
+  
+    <ng-container *ngIf="auth.isLoggedIn() && auth.getRole()==='admin'">
+      <a mat-button routerLink="/admin/approve-expenses" routerLinkActive="active">Approve</a>
+      <a mat-button routerLink="/admin/departments" routerLinkActive="active">Departments</a>
+      <a mat-button routerLink="/admin/expenses" routerLinkActive="active">All Expenses</a>
+      <a mat-button routerLink="/admin/analytics" routerLinkActive="active">Analytics</a>
+      <button mat-button (click)="logout()">Logout</button>
+    </ng-container>
+  </mat-toolbar>
+  
