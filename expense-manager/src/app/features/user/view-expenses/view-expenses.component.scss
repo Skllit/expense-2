@@ -1,0 +1,21 @@
+/* src/app/features/user/view-expenses/view-expenses.component.scss */
+.card {
+    position: relative;
+    padding: 16px;
+  }
+  .export-btn {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+  }
+  .full-width {
+    width: 100%;
+    margin-top: 16px;
+  }
+  .credit {
+    color: green;
+  }
+  .debit {
+    color: red;
+  }
+  

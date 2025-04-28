@@ -62,3 +62,15 @@ exports.analytics = async (req, res) => {
     res.status(500).send('Server error');
   }
 };
+// backend/controllers/adminController.js
+// ─ add at bottom of file ─
+exports.getAllExpenses = async (req, res) => {
+  try {
+    const expenses = await Expense.find()
+      .populate('user', 'name email')
+      .populate('department', 'name');
+    res.json(expenses);
+  } catch (err) {
+    res.status(500).send('Server error');
+  }
+};

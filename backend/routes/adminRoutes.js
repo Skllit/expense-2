@@ -3,6 +3,10 @@ const express = require('express');
 const router = express.Router();
 const { addDepartment, getDepartments, deleteDepartment, getPendingExpenses, approveExpense, analytics } = require('../controllers/adminController');
 const { protect, admin } = require('../middleware/authMiddleware');
+const { getAllExpenses } = require('../controllers/adminController');
+
+
+router.get('/expenses/all', protect, admin, getAllExpenses);
 
 router.post('/departments', protect, admin, addDepartment);
 router.get('/departments', protect, admin, getDepartments);

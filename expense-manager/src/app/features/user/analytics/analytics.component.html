@@ -1,6 +1,23 @@
-<!-- src/app/features/user/analytics/analytics.component.html -->
-<mat-card>
-  <h2>Your Analytics</h2>
-  <p>Total: {{ total }}</p>
-  <p>Count: {{ count }}</p>
+<!-- frontend/src/app/features/user/analytics/analytics.component.html -->
+<mat-card class="card">
+  <h2>Expense Analytics</h2>
+  <div class="charts">
+    <ngx-charts-pie-chart
+      [results]="byCategory"
+      [legend]="true"
+      [labels]="true"
+      class="chart"></ngx-charts-pie-chart>
+
+    <ngx-charts-pie-chart
+      [results]="creditsDebits"
+      [legend]="true"
+      [labels]="true"
+      class="chart"></ngx-charts-pie-chart>
+
+    <ngx-charts-line-chart
+      [results]="monthlyTrend"
+      [xAxis]="true"
+      [yAxis]="true"
+      class="chart"></ngx-charts-line-chart>
+  </div>
 </mat-card>

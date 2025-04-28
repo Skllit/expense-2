@@ -1,8 +1,26 @@
-<!-- frontend/src/app/features/admin/analytics/analytics.component.html -->
-<mat-card>
-    <h2>Admin Analytics</h2>
-    <p>Total Expenses (approved): {{total}}</p>
-    <p>Number of Expenses: {{count}}</p>
-    <!-- Additional analytics charts -->
-  </mat-card>
-  
+<!-- src/app/features/admin/analytics/analytics.component.html -->
+<mat-card class="card">
+  <h2>Admin Analytics</h2>
+  <div class="charts">
+    <ngx-charts-bar-vertical
+      [results]="deptSpending"
+      [xAxis]="true"
+      [yAxis]="true"
+      class="chart">
+    </ngx-charts-bar-vertical>
+
+    <ngx-charts-pie-chart
+      [results]="statusBreakdown"
+      [legend]="true"
+      [labels]="true"
+      class="chart">
+    </ngx-charts-pie-chart>
+
+    <ngx-charts-line-chart
+      [results]="monthlyTrend"
+      [xAxis]="true"
+      [yAxis]="true"
+      class="chart">
+    </ngx-charts-line-chart>
+  </div>
+</mat-card>

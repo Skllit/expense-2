@@ -1,7 +1,8 @@
-// frontend/src/app/core/admin.service.ts
+// src/app/core/admin.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Expense }    from './models/expense.model';
 
 @Injectable({ providedIn: 'root' })
 export class AdminService {
@@ -9,8 +10,8 @@ export class AdminService {
 
   constructor(private http: HttpClient) {}
 
-  getPendingExpenses(): Observable<any> {
-    return this.http.get(`${this.api}/expenses/pending`);
+  getPendingExpenses(): Observable<Expense[]> {
+    return this.http.get<Expense[]>(`${this.api}/expenses/pending`);
   }
 
   approveExpense(id: string): Observable<any> {
@@ -19,5 +20,9 @@ export class AdminService {
 
   getAnalytics(): Observable<any> {
     return this.http.get(`${this.api}/analytics`);
+  }
+
+  getAllExpenses(): Observable<Expense[]> {
+    return this.http.get<Expense[]>(`${this.api}/expenses/all`);
   }
 }

@@ -1,0 +1,18 @@
+/* frontend/src/app/features/admin/all-expenses/all-expenses.component.scss */
+.card {
+    position: relative;
+    padding: 16px;
+  }
+  .export-btn {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+  }
+  .full-width {
+    width: 100%;
+  }
+  .amount {
+    color: green;
+    font-weight: bold;
+  }
+  
