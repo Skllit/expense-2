@@ -1,6 +1,7 @@
 // frontend/src/main.ts
 import { bootstrapApplication } from '@angular/platform-browser';
 import { provideRouter } from '@angular/router';
+import { provideAnimations }    from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app/app.component';
 import { TokenInterceptor } from './app/core/token.interceptor';
@@ -16,6 +17,7 @@ bootstrapApplication(AppComponent, {
       { path: 'admin', loadChildren: () => import('./app/features/admin/admin.routes').then(m => m.adminRoutes) },
       { path: '**', redirectTo: '/login' }
     ]),
+        provideAnimations(),
         provideHttpClient(withInterceptorsFromDi()),
         { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }
   ]

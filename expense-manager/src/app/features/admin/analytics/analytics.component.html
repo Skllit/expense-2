@@ -1,15 +1,20 @@
-<!-- src/app/features/admin/analytics/analytics.component.html -->
-<mat-card class="card">
+<!-- frontend/src/app/features/admin/analytics/analytics.component.html -->
+<mat-card class="analytics-card">
   <h2>Admin Analytics</h2>
   <div class="charts">
     <ngx-charts-bar-vertical
+      [view]="view"
+      [scheme]="colorScheme"
       [results]="deptSpending"
       [xAxis]="true"
       [yAxis]="true"
+      [legend]="false"
       class="chart">
     </ngx-charts-bar-vertical>
 
     <ngx-charts-pie-chart
+      [view]="view"
+      [scheme]="colorScheme"
       [results]="statusBreakdown"
       [legend]="true"
       [labels]="true"
@@ -17,9 +22,13 @@
     </ngx-charts-pie-chart>
 
     <ngx-charts-line-chart
+      [view]="view"
+      [scheme]="colorScheme"
       [results]="monthlyTrend"
       [xAxis]="true"
       [yAxis]="true"
+      [legend]="false"
+      [showGridLines]="true"
       class="chart">
     </ngx-charts-line-chart>
   </div>

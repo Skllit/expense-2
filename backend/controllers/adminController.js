@@ -67,10 +67,10 @@ exports.analytics = async (req, res) => {
 exports.getAllExpenses = async (req, res) => {
   try {
     const expenses = await Expense.find()
-      .populate('user', 'name email')
-      .populate('department', 'name');
+      .populate('user','name email')
+      .populate('department','name');
     res.json(expenses);
   } catch (err) {
-    res.status(500).send('Server error');
+    res.status(500).json({ message: 'Server error' });
   }
 };

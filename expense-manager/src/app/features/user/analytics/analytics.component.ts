@@ -1,10 +1,10 @@
-// src/app/features/user/analytics/analytics.component.ts
-import { Component, OnInit } from '@angular/core';
-import { CommonModule }       from '@angular/common';
-import { NgxChartsModule }    from '@swimlane/ngx-charts';
-import { MatCardModule }      from '@angular/material/card';
-import { ExpenseService }     from '../../../core/expense.service';
-import { Expense }            from '../../../core/models/expense.model';
+// frontend/src/app/features/user/analytics/analytics.component.ts
+import { Component, OnInit }     from '@angular/core';
+import { CommonModule }           from '@angular/common';
+import { NgxChartsModule, Color, ScaleType } from '@swimlane/ngx-charts';
+import { MatCardModule }          from '@angular/material/card';
+import { ExpenseService }         from '../../../core/expense.service';
+import { Expense }                from '../../../core/models/expense.model';
 
 @Component({
   standalone: true,
@@ -18,26 +18,35 @@ export class AnalyticsComponent implements OnInit {
   creditsDebits: { name: string; value: number }[] = [];
   monthlyTrend:  { name: string; value: number }[] = [];
 
+  view: [number,number] = [400,300];
+  colorScheme: Color = {
+    name: 'userScheme',
+    selectable: true,
+    group: ScaleType.Ordinal,
+    domain: ['#42A5F5','#66BB6A','#FFA726','#AB47BC','#FF7043']
+  };
+
   constructor(private svc: ExpenseService) {}
 
   ngOnInit() {
     this.svc.getExpenses().subscribe((data: Expense[]) => {
       const cats: Record<string,number> = {};
-      const cd:   Record<string,number> = { Credit: 0, Debit: 0 };
+      const cd:   Record<string,number> = { Credit:0, Debit:0 };
       const months: Record<string,number> = {};
 
       data.forEach((e: Expense) => {
-        cats[e.description] = (cats[e.description] || 0) + e.amount;
+        cats[e.description]          = (cats[e.description] || 0) + e.amount;
         if (e.amount > 0) cd['Credit'] += e.amount;
-        else cd['Debit'] += Math.abs(e.amount);
+        else cd['Debit']           += Math.abs(e.amount);
 
-        const m = new Date(e.date).toLocaleString('default',{ month:'short' });
+        const m = new Date(e.date)
+          .toLocaleString('default',{ month:'short' });
         months[m] = (months[m] || 0) + e.amount;
       });
 
-      this.byCategory    = Object.entries(cats).map(([name,value])=>({ name, value }));
-      this.creditsDebits = Object.entries(cd).map(([name,value])=>({ name, value }));
-      this.monthlyTrend  = Object.entries(months).map(([name,value])=>({ name, value }));
+      this.byCategory    = Object.entries(cats).map(([name,value])=>({ name,value }));
+      this.creditsDebits = Object.entries(cd).map(([name,value])=>({ name,value }));
+      this.monthlyTrend  = Object.entries(months).map(([name,value])=>({ name,value }));
     });
   }
 }
